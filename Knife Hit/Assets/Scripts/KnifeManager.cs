@@ -3,7 +3,8 @@ using System.Collections;
 
 public class KnifeManager : MonoBehaviour
 {
-    public static CanvasGroup[] knifeSlots = new CanvasGroup[12];
+    [SerializeField] private SkinManager skinManager;
+    public static CanvasGroup[] knifeSlots = new CanvasGroup[10];
 
     private float timeToDeley;
     public float delay;
@@ -13,6 +14,14 @@ public class KnifeManager : MonoBehaviour
         get
         {
             return timeToDeley >= delay;
+        }
+    }
+
+    public SkinManager SkinManager
+    {
+        get
+        {
+            return skinManager;
         }
     }
 
@@ -26,7 +35,7 @@ public class KnifeManager : MonoBehaviour
 
     private void Update()
     {
-        GetComponent<SpriteRenderer>().sprite = SkinManager.selectSkin.Sprite;
+        GetComponent<SpriteRenderer>().sprite = skinManager.selectSkin.Sprite;
 
         if (timeToDeley < delay)
         {

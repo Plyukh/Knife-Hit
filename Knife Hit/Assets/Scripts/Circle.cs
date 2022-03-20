@@ -1,12 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-enum RotationType
-{
-    BaseSlow,
-    BaseMediu,
-    BaseFast,
-}
 public class Circle : MonoBehaviour
 {
     public float speed;

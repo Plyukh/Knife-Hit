@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Skin", menuName = "Skin", order = 100)]
-public class Skin : ScriptableObject
+public class Skin : MonoBehaviour
 {
     [SerializeField] private Sprite sprite;
     [SerializeField] private bool unlock;

@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class AddSkin : MonoBehaviour
 {
+    [SerializeField] private SkinManager skinManager;
+
     public void AddNewSkin()
     {
-        int random = Random.Range(0, SkinManager.Skins.Length);
+        int random = Random.Range(0, skinManager.Skins.Length);
 
-        if(SkinManager.Skins[random].Unlock == false)
+        if(skinManager.Skins[random].Unlock == false)
         {
-            SkinManager.UnlockSkin(random);
-            gameObject.transform.GetChild(0).GetComponent<Image>().sprite = SkinManager.Skins[random].Sprite;
+            skinManager.UnlockSkin(random);
+            gameObject.transform.GetChild(0).GetComponent<Image>().sprite = skinManager.Skins[random].Sprite;
         }
         else
         {

@@ -20,9 +20,9 @@ public class Tap : MonoBehaviour
 
     private void Update()
     {
-        knifePrefab.GetComponent<SpriteRenderer>().sprite = SkinManager.selectSkin.Sprite;
-        knifePrefab.GetComponent<Knife>().knifeInCircle.GetComponent<SpriteRenderer>().sprite = SkinManager.selectSkin.Sprite;
-        knifePrefab.GetComponent<Knife>().particleLose.material = SkinManager.selectSkin.KnifeMaterial;
+        knifePrefab.GetComponent<SpriteRenderer>().sprite = knifeManager.SkinManager.selectSkin.Sprite;
+        knifePrefab.GetComponent<Knife>().knifeInCircle.GetComponent<SpriteRenderer>().sprite = knifeManager.SkinManager.selectSkin.Sprite;
+        knifePrefab.GetComponent<Knife>().particleLose.material = knifeManager.SkinManager.selectSkin.KnifeMaterial;
 
         knifeManager.GetComponent<SpriteRenderer>().color += new Color32(0, 0, 0, 5);
 

@@ -5,11 +5,11 @@ using System;
 public class SkinManager : MonoBehaviour
 {
     [SerializeField] private GameObject skinSlot;
-    [SerializeField] private static Skin[] skins;
+    [SerializeField] private Skin[] skins;
     [SerializeField] private static bool unlockAllSkins;
-    public static Skin selectSkin;
+    public Skin selectSkin;
 
-    public static Skin[] Skins
+    public Skin[] Skins
     {
         get
         {
@@ -27,19 +27,21 @@ public class SkinManager : MonoBehaviour
 
     private void Awake()
     {
-        skins = new Skin[Resources.FindObjectsOfTypeAll<Skin>().Length];
+        selectSkin = skins[0];
+    }
 
-        for (int i = 0; i < Resources.FindObjectsOfTypeAll<Skin>().Length; i++)
+    private void Start()
+    {
+        for (int i = 0; i < skins.Length; i++)
         {
-            skins[i] = Resources.FindObjectsOfTypeAll<Skin>()[i];
             Instantiate(skinSlot, transform);
         }
 
         for (int i = 0; i < skins.Length; i++)
         {
             transform.GetChild(i).GetChild(1).GetComponent<Image>().sprite = skins[i].Sprite;
+            transform.GetChild(i).GetComponent<SkinSlot>().id = i;
         }
-        selectSkin = skins[0];
     }
 
     private void Update()
@@ -49,10 +51,12 @@ public class SkinManager : MonoBehaviour
             if (!skins[i].Unlock)
             {
                 transform.GetChild(i).GetChild(1).GetComponent<Image>().color = new Color32(0, 0, 0, 255);
+                transform.GetChild(i).GetComponent<Button>().interactable = false;
             }
             else
             {
                 transform.GetChild(i).GetChild(1).GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                transform.GetChild(i).GetComponent<Button>().interactable = true;
             }
         }
 
@@ -70,8 +74,9 @@ public class SkinManager : MonoBehaviour
         }
     }
 
-    public static void UnlockSkin(int index)
+    public void UnlockSkin(int index)
     {
         skins[index].Unlock = true;
+        Save.SaveSkins(index);
     }
 }
